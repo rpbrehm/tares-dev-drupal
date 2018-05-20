@@ -1,0 +1,163 @@
+{
+    "name": "bobbo/tares-dev-drupal",
+    "description": "TARES",
+    "type": "",
+    "require": {
+        "ext-curl": "*",
+        "composer/installers": "^1.0",
+        "cweagans/composer-patches": "^1.6.0",
+        "drupal-composer/drupal-scaffold": "^2.0.0",
+        "drupal/admin_toolbar": "^1.23",
+        "drupal/backup_migrate": "^4.0",
+        "drupal/blog": "2.x-dev",
+        "drupal/commerce": "^2.6",
+        "drupal/commerce_paypal": "^1.0@beta",
+        "drupal/commerce_postcode_delivery": "^1.2",
+        "drupal/commerce_shipping": "^2.0@beta",
+        "drupal/components": "^1.0",
+        "drupal/config_installer": "^1.8",
+        "drupal/console": "^1.0.2",
+        "drupal/core": "^8.5",
+        "drupal/devel": "^1.2",
+        "drupal/elasticsearch_connector": "^5.0@alpha",
+        "drupal/entity_reference_revisions": "^1.4",
+        "drupal/google_analytics": "^2.2",
+        "drupal/linkit": "^4.3",
+        "drupal/metatag": "^1.5",
+        "drupal/page_manager": "^4.0@beta",
+        "drupal/panels": "^4.3",
+        "drupal/paragraphs": "^1.2",
+        "drupal/pathauto": "^1.2",
+        "drupal/redirect": "^1.2",
+        "drupal/search_api": "^1.6",
+        "drupal/simple_sitemap": "^2.12",
+        "drupal/swiftmailer": "~1.0",
+        "drupal/token": "^1.1",
+        "drupalcommerce/commerce_base": "dev-8.x-1.x",
+        "drush/drush": "~8.0|^9.0.0-beta8",
+        "goalgorilla/open_social": "dev-8.x-1.x",
+        "goalgorilla/open_social_scripts": "dev-master",
+        "oomphinc/composer-installers-extender": "^1.1",
+        "webflo/drupal-finder": "^1.0",
+        "webmozart/path-util": "^2.3"
+    },
+    "require-dev": {
+        "jcalderonzumba/gastonjs": "~1.0.2",
+        "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
+        "mikey179/vfsStream": "~1.2",
+        "symfony/css-selector": "~2.8",
+        "behat/behat": "3.*@stable",
+        "behat/mink": "1.*@stable",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
+        "drupal/coder": "8.*@stable",
+        "drupal/drupal-extension": "3.3.0",
+        "phpmd/phpmd": "@stable",
+        "pdepend/pdepend": "2.1.0",
+        "sebastian/phpcpd": "*",
+        "phpunit/phpunit": "^4.8",
+        "drupal/console": "1.1",
+        "squizlabs/php_codesniffer": "2.7.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "replace": {},
+    "provide": {},
+    "suggest": {},
+    "autoload": {
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ]
+    },
+    "autoload-dev": {},
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "commerce_base": {
+            "type": "vcs",
+            "url": "https://github.com/drupalcommerce/commerce_base"
+        },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "sort-packages": true
+    },
+    "scripts": {
+        "drupal-scaffold": [
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+        ],
+        "pre-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "pre-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "post-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+        ],
+        "post-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+        ]
+    },
+    "extra": {
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "html/core": [
+                "drupal/core"
+            ],
+            "html/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "html/profiles/contrib/social": [
+                "goalgorilla/open_social"
+            ],
+            "html/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "html/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "html/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "scripts/{$name}": [
+                "goalgorilla/open_social_scripts"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "enable-patching": true,
+        "patches": {
+            "squizlabs/html_codesniffer": {
+                "Translatings does not work": "patches/DS-5443-accessibility.patch"
+            }
+        }
+    },
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "",
+            "role": ""
+        }
+    ],
+    "support": {},
+    "archive": {}
+}
